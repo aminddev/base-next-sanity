@@ -1,0 +1,11 @@
+{
+  "Home": {
+    "title": "Latest Stories",
+    "description": "Built with Next.js 16, Sanity v3, and Tailwind CSS 4.",
+    "noPosts": "No posts found. Start by adding one in Sanity Studio."
+  },
+  "Navigation": {
+    "home": "Home",
+    "studio": "Studio"
+  }
+}

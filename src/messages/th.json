@@ -1,0 +1,11 @@
+{
+  "Home": {
+    "title": "เรื่องราวล่าสุด",
+    "description": "สร้างด้วย Next.js 16, Sanity v3 และ Tailwind CSS 4",
+    "noPosts": "ไม่พบโพสต์ เริ่มต้นด้วยการเพิ่มโพสต์ใน Sanity Studio"
+  },
+  "Navigation": {
+    "home": "หน้าแรก",
+    "studio": "สตูดิโอ"
+  }
+}
