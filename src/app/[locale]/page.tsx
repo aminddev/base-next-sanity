@@ -2,23 +2,19 @@ import { sanityFetch } from '@/sanity/lib/live'
 import { POSTS_QUERY } from '@/sanity/lib/queries'
 import SanityImage from '@/components/SanityImage'
 import { Link } from '@/i18n/routing'
-import { useTranslations } from 'next-intl'
-import { setRequestLocale } from 'next-intl/server'
+import { setRequestLocale, getTranslations } from 'next-intl/server'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   setRequestLocale(locale)
   
-  const t = useTranslations('Home')
+  const t = await getTranslations('Home')
 
   const { data: posts } = await sanityFetch({ 
     query: POSTS_QUERY,
     params: { language: locale },
-    next: { 
-      tags: ['post'],
-      revalidate: 3600 // 1-hour safety net
-    }
+    tags: ['post']
   })
 
   return (

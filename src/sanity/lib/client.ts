@@ -7,6 +7,8 @@ export const client = createClient({
   useCdn: false, // Must be false for Stega/Live editing
   stega: {
     studioUrl: process.env.NEXT_PUBLIC_SANITY_STUDIO_URL || '/studio',
-    enabled: process.env.NEXT_PUBLIC_SANITY_DATASET === 'production',
+    // Disable Stega by default to prevent HTML payload bloat
+    // next-sanity/live will auto-enable it during Draft Mode
+    enabled: false,
   },
 })

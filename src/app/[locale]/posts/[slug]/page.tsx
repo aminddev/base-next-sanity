@@ -33,10 +33,7 @@ export default async function PostPage({ params }: { params: Promise<{ locale: s
   const { data: post } = await sanityFetch({ 
     query: POST_QUERY, 
     params: { language: locale, slug },
-    next: { 
-      tags: [`post:${slug}`, 'post'],
-      revalidate: 3600 // 1-hour safety net
-    }
+    tags: [`post:${slug}`, 'post']
   })
 
   if (!post) {

@@ -19,15 +19,15 @@ export async function POST(req: NextRequest) {
     }
 
     // 1. Revalidate by Type (Generic)
-    revalidateTag(body._type)
+    revalidateTag(body._type, 'default')
 
     // 2. Revalidate by Specific Slug (Granular)
     if (body.slug?.current) {
-      revalidateTag(`${body._type}:${body.slug.current}`)
+      revalidateTag(`${body._type}:${body.slug.current}`, 'default')
     }
 
     // 3. Revalidate by Document ID (Safety)
-    revalidateTag(body._id)
+    revalidateTag(body._id, 'default')
 
     return NextResponse.json({ 
       revalidated: true, 

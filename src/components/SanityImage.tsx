@@ -1,4 +1,6 @@
-import NextImage, { ImageProps as NextImageProps } from 'next/image'
+'use client'
+
+import NextImage, { ImageProps as NextImageProps, ImageLoaderProps } from 'next/image'
 import { urlFor } from '@/sanity/lib/image'
 
 interface SanityImageProps extends Omit<NextImageProps, 'src'> {
@@ -12,12 +14,16 @@ export default function SanityImage({ asset, alt, ...props }: SanityImageProps) 
   const ref = asset.asset?._ref || asset._ref
   const dimensions = ref?.split('-')[2]?.split('x')
   
+  // Custom loader to bypass Vercel Image Optimization and use Sanity CDN natively
+  const customLoader = ({ width, quality }: ImageLoaderProps) => {
+    return urlFor(asset).width(width).quality(quality || 80).auto('format').url()
+  }
+
   if (!dimensions) {
-    return <NextImage src={urlFor(asset).url()} alt={alt || ''} {...props} />
+    return <NextImage loader={customLoader} src={ref || ''} alt={alt || ''} {...props} />
   }
 
   const [width, height] = dimensions.map(Number)
-  const isPriority = props.priority
 
   return (
     <div 
@@ -28,10 +34,11 @@ export default function SanityImage({ asset, alt, ...props }: SanityImageProps) 
       }}
     >
       <NextImage
-        src={urlFor(asset).width(isPriority ? 1600 : 800).auto('format').url()}
+        loader={customLoader}
+        src={ref}
         alt={alt || ''}
         fill
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        sizes={props.sizes || "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"}
         className="object-cover"
         {...props}
       />

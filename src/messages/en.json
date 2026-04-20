@@ -7,5 +7,16 @@
   "Navigation": {
     "home": "Home",
     "studio": "Studio"
+  },
+  "NotFound": {
+    "title": "Page Not Found",
+    "description": "The page you are looking for doesn't exist or has been moved.",
+    "goHome": "Return Home"
+  },
+  "Error": {
+    "title": "Something went wrong!",
+    "description": "We've encountered an unexpected error.",
+    "tryAgain": "Try again",
+    "goHome": "Go to Homepage"
   }
 }
